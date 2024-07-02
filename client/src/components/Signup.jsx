@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useUser } from '../Contexts/UserContext';
 import '../styles.css';
 
@@ -10,16 +11,28 @@ export const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    if(username !== '' && password !== '' && confirmPassword !== ''){
-      if(password !== confirmPassword){
+    if (username !== '' && password !== '' && confirmPassword !== '') {
+      if (password !== confirmPassword) {
         alert('Passwords do not match');
         return;
       }
-      setUser({ username });
-      localStorage.setItem('user', JSON.stringify({ username }));
-      navigate('/');
+      try {
+        const response = await axios.post('http://localhost:3000/users', {
+          username,
+          password,
+        });
+        if (response.data) {
+          const { id, username } = response.data[0];
+          setUser({ id: id, username: username });
+          navigate('/');
+        } else {
+          alert('Failed to create account');
+        }
+      } catch (error) {
+        alert(error.response ? error.response.data.message : 'Error while signing up');
+      }
     }
   };
 
