@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { useUser } from '../../contexts/UserContext';
+import { useUser } from '../Contexts/UserContext';  
 import axios from 'axios';
 
 const baseURL = 'https://jsonplaceholder.typicode.com';

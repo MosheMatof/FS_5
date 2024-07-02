@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useUser } from '../../contexts/UserContext';
+import { useUser } from '../Contexts/UserContext';  
 import { AlbumOverview } from './AlbumOverview';
 import { AlbumDetail } from './AlbumDetail';
 
