@@ -24,7 +24,7 @@ export const Signup = () => {
           password,
         });
         if (response.data) {
-          const { id, username } = response.data[0];
+          const { id, username } = response.data;
           setUser({ id: id, username: username });
           navigate('/');
         } else {
